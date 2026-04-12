@@ -422,7 +422,7 @@ namespace Systems.SimpleFactions.Abstract
         #region Level change helpers
 
         private void HandleAutomaticLevelChange<TFaction>(
-            TFaction faction,
+            [NotNull] TFaction faction,
             FactionMemberState state,
             long previousRep,
             long newRep,

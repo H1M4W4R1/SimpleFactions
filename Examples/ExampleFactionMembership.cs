@@ -19,7 +19,7 @@ namespace Systems.SimpleFactions.Examples
     ///         </code>
     ///     </para>
     ///     <para>
-    ///         Override <see cref="GetHolder"/> if the holder component is on a different
+    ///         Override <see cref="FactionMembershipBase{THolder}.GetHolder"/> if the holder component is on a different
     ///         <c>GameObject</c> or is not auto-discoverable via <c>GetComponent</c>.
     ///     </para>
     /// </remarks>

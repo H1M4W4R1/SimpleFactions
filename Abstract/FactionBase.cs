@@ -92,35 +92,35 @@ namespace Systems.SimpleFactions.Abstract
         ///     Determines whether the object described by <paramref name="context"/> may join
         ///     this faction. Override to add custom join conditions.
         /// </summary>
-        protected internal virtual OperationResult CanJoin(in JoinFactionContext context)
+        [UsedImplicitly] protected internal virtual OperationResult CanJoin(in JoinFactionContext context)
             => FactionOperations.Permitted();
 
         /// <summary>
         ///     Determines whether the object described by <paramref name="context"/> may leave
         ///     this faction. Override to add custom leave conditions.
         /// </summary>
-        protected internal virtual OperationResult CanLeave(in LeaveFactionContext context)
+        [UsedImplicitly] protected internal virtual OperationResult CanLeave(in LeaveFactionContext context)
             => FactionOperations.Permitted();
 
         /// <summary>
         ///     Determines whether the reputation change described by <paramref name="context"/>
         ///     is permitted. Override to add custom conditions.
         /// </summary>
-        protected internal virtual OperationResult CanChangeReputation(in ReputationChangeContext context)
+        [UsedImplicitly] protected internal virtual OperationResult CanChangeReputation(in ReputationChangeContext context)
             => FactionOperations.Permitted();
 
         /// <summary>
         ///     Determines whether the promotion described by <paramref name="context"/> is permitted.
         ///     Override to block or gate automatic promotions at the faction level.
         /// </summary>
-        protected internal virtual OperationResult CanBePromoted(in FactionLevelChangeContext context)
+        [UsedImplicitly] protected internal virtual OperationResult CanBePromoted(in FactionLevelChangeContext context)
             => FactionOperations.Permitted();
 
         /// <summary>
         ///     Determines whether the demotion described by <paramref name="context"/> is permitted.
         ///     Override to block or gate automatic demotions at the faction level.
         /// </summary>
-        protected internal virtual OperationResult CanBeDemoted(in FactionLevelChangeContext context)
+        [UsedImplicitly] protected internal virtual OperationResult CanBeDemoted(in FactionLevelChangeContext context)
             => FactionOperations.Permitted();
 
         #endregion
