@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using Systems.SimpleFactions.Abstract;
 using Systems.SimpleFactions.Interfaces;
@@ -7,6 +8,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
+[assembly: InternalsVisibleTo("SimpleFactions.Tests")]
 namespace Systems.SimpleFactions.Editor.Automation
 {
     /// <summary>
@@ -129,13 +131,19 @@ namespace Systems.SimpleFactions.Editor.Automation
                         continue;
                     }
 
-                    faction.AssignLevel(level);
+                    if (!faction.AssignLevel(level)) continue;
+
                     EditorUtility.SetDirty(faction);
                     anyDirty = true;
                 }
             }
 
             return anyDirty;
+        }
+
+        internal static bool AssignAllForTests()
+        {
+            return AssignAllInternal();
         }
 
         [CanBeNull]

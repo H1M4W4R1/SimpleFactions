@@ -1,4 +1,7 @@
 using JetBrains.Annotations;
+#if UNITY_INCLUDE_TESTS
+using Systems.SimpleCore.Identifiers;
+#endif
 using Systems.SimpleCore.Storage.Databases;
 using Systems.SimpleFactions.Abstract;
 
@@ -16,5 +19,19 @@ namespace Systems.SimpleFactions.Data
 
         /// <inheritdoc/>
         [NotNull] protected override string AddressableLabel => LABEL;
+
+#if UNITY_INCLUDE_TESTS
+        internal static void RegisterForTests([NotNull] FactionBase faction)
+        {
+            internalDataStorage.Add(
+                new AddressableDatabaseEntry<FactionBase>(HashIdentifier.New(faction.GetType()), faction));
+            internalDataStorage.Sort((left, right) => left.hashIdentifier.CompareTo(right.hashIdentifier));
+        }
+
+        internal static void ClearForTests()
+        {
+            internalDataStorage.Clear();
+        }
+#endif
     }
 }

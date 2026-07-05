@@ -96,7 +96,7 @@ When a concrete `ReputationLevelBase` type implements `IForFaction<TFaction>`, t
 3. Finds the matching `TFaction` asset (auto-generated in `Assets/Generated/Factions/`).
 4. Calls `faction.AssignLevel(level)` — adds the level if absent and re-sorts the list by
    `PromotionThreshold` ascending (index 0 = lowest rank).
-5. Saves dirty assets.
+5. Marks the faction asset dirty only when the level list changed, then saves outside Unity's asset-import callback.
 
 Levels that do **not** implement `IForFaction<TFaction>` are never auto-assigned and can be managed manually via the Inspector.
 

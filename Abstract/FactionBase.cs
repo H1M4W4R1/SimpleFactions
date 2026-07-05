@@ -10,6 +10,7 @@ using Systems.SimpleFactions.Operations;
 using UnityEngine;
 
 [assembly: InternalsVisibleTo("SimpleFactions.Editor")]
+[assembly: InternalsVisibleTo("SimpleFactions.Tests")]
 namespace Systems.SimpleFactions.Abstract
 {
     /// <summary>
@@ -54,15 +55,17 @@ namespace Systems.SimpleFactions.Abstract
         ///     Called by the editor postprocessor when processing <see cref="IForFaction{TFaction}"/>
         ///     implementations.
         /// </summary>
-        internal void AssignLevel([NotNull] ReputationLevelBase level)
+        /// <returns><c>true</c> when the list changed; otherwise <c>false</c>.</returns>
+        internal bool AssignLevel([NotNull] ReputationLevelBase level)
         {
             for (int i = 0; i < _levels.Count; i++)
             {
-                if (ReferenceEquals(_levels[i], level)) return;
+                if (ReferenceEquals(_levels[i], level)) return false;
             }
 
             _levels.Add(level);
             SortLevels();
+            return true;
         }
 
         /// <summary>
