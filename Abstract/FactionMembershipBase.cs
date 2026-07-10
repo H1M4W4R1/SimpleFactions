@@ -473,14 +473,22 @@ namespace Systems.SimpleFactions.Abstract
             // DEMOTION — only when reputation decreased and a level is currently active
             if (newRep < previousRep && state.currentLevelIndex >= 0)
             {
-                for (int i = state.currentLevelIndex; i >= 0; i--)
+                while (state.currentLevelIndex >= 0)
                 {
-                    ReputationLevelBase currentAtIndex = levels[i];
-                    if (!currentAtIndex.AutomaticDemotion) continue;
-                    if (newRep >= currentAtIndex.DemotionThreshold) continue;
+                    int demotionIndex = -1;
+                    for (int i = state.currentLevelIndex; i >= 0; i--)
+                    {
+                        ReputationLevelBase currentAtIndex = levels[i];
+                        if (!currentAtIndex.AutomaticDemotion) continue;
+                        if (newRep >= currentAtIndex.DemotionThreshold) continue;
+                        demotionIndex = i;
+                        break;
+                    }
+
+                    if (demotionIndex == -1) break;
 
                     int prevIndex = state.currentLevelIndex;
-                    int newIndex = i - 1;
+                    int newIndex = demotionIndex - 1;
                     ReputationLevelBase prevLevel = levels[prevIndex];
                     ReputationLevelBase newLevel = GetLevelAt(faction, newIndex);
 
@@ -505,8 +513,6 @@ namespace Systems.SimpleFactions.Abstract
                     state.currentLevelIndex = newIndex;
                     if (actionSource != ActionSource.Internal)
                         FireLevelCallbacks(faction, state, prevLevel, newLevel, prevIndex, newIndex, isPromotion: false);
-
-                    break;
                 }
             }
         }

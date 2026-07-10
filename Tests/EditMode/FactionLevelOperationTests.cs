@@ -244,6 +244,32 @@ namespace Systems.SimpleFactions.Tests
         }
 
         [Test]
+        public void ChangeReputation_LargeLossDemotesThroughAllLevels()
+        {
+            TestFaction faction = CreateRegisteredFaction<TestFaction>();
+            TestReputationLevel lowLevel = CreateRegisteredLevel<TestReputationLevel>(
+                automaticPromotion: true, promotionThreshold: 10L,
+                automaticDemotion: true, demotionThreshold: 10L);
+            TestReputationLevel middleLevel = CreateRegisteredLevel<TestReputationLevel>(
+                automaticPromotion: true, promotionThreshold: 50L,
+                automaticDemotion: true, demotionThreshold: 50L);
+            TestReputationLevel highLevel = CreateRegisteredLevel<TestReputationLevel>(
+                automaticPromotion: true, promotionThreshold: 100L,
+                automaticDemotion: true, demotionThreshold: 100L);
+            faction.AssignLevel(lowLevel);
+            faction.AssignLevel(middleLevel);
+            faction.AssignLevel(highLevel);
+            TestFactionMembership membership = CreateMembership();
+            membership.JoinFaction<TestFaction>();
+            membership.ChangeReputation<TestFaction>(150L);
+
+            membership.ChangeReputation<TestFaction>(-150L);
+
+            Assert.IsNull(membership.GetCurrentLevel<TestFaction>());
+            Assert.AreEqual(4, faction.LevelChangedCount);
+        }
+
+        [Test]
         public void ChangeReputation_WhenDemotionDenied_LeavesCurrentLevel()
         {
             TestFaction faction = CreateRegisteredFaction<TestFaction>();
