@@ -193,3 +193,12 @@ suppresses all event callbacks (useful for initialisation or batch operations).
 | `FactionAPI` | Static facade — the primary entry point for external code |
 | `FactionOperations` | Result-code constants and `OperationResult` factories |
 | `IForFaction<TFaction>` | Marker interface; triggers auto-assignment of levels to factions |
+
+---
+
+## Examples included
+
+- `Scene - Factions.unity`: runs a console-driven join and reputation change example.
+- `ExampleFactionsScene`: scene driver with a context menu action for replaying the example.
+- `ExampleFaction`, `ExampleFactionMembership`, and `ExampleFactionHolder`: minimal typed faction setup.
+- `ExampleReputationLevel`: auto-assigned reputation level example for `ExampleFaction`.
