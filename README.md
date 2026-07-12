@@ -198,7 +198,7 @@ suppresses all event callbacks (useful for initialisation or batch operations).
 
 ## Examples included
 
-- `Scene - Factions.unity`: runs a console-driven join and reputation change example.
-- `ExampleFactionsScene`: scene driver with a context menu action for replaying the example.
+- `Scene - Factions.unity`: exposes runtime Unity UI for join, leave, reputation gain/loss, and manual level cases.
+- `ExampleFactionsScene`: scene driver with runtime buttons and context menu actions for replaying the examples.
 - `ExampleFaction`, `ExampleFactionMembership`, and `ExampleFactionHolder`: minimal typed faction setup.
 - `ExampleReputationLevel`: auto-assigned reputation level example for `ExampleFaction`.
